@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using VerticalSliceArchExample.Behaviors;
 using VerticalSliceArchExample.Data;
 
 namespace VerticalSliceArchExample.Extensions;
@@ -17,6 +18,8 @@ public static class ApplicationServicesExtensions
         services.AddMediatR(currentAssembly);
 
         services.AddValidatorsFromAssembly(currentAssembly);
+
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
         services.AddDbContext<ApiDbContext>(opt => opt.UseInMemoryDatabase("VerticalSliceArchDB"));
 

@@ -1,8 +1,12 @@
+using VerticalSliceArchExample.Behaviors.Filters;
 using VerticalSliceArchExample.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(opt =>
+{
+    opt.Filters.Add<FluentValidationExceptionFilter>();
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
